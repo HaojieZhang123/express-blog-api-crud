@@ -64,20 +64,31 @@ const store = (req, res) => {
 
 // update
 const update = (req, res) => {
-    const id = req.params.id;
+    const id = parseInt(req.params.id);
     res.send(`Post con id ${id} aggiornato`);
 };
 
 // modify
 const modify = (req, res) => {
-    const id = req.params.id;
+    const id = parseInt(req.params.id);
     res.send(`Post con id ${id} modificato`);
 };
 
 // delete
 const destroy = (req, res) => {
-    const id = req.params.id;
-    res.send(`Post con id ${id} eliminato`);
+    const id = parseInt(req.params.id);
+
+    // find the element with the id
+    const post = posts.find(element => element.id === id);
+
+    // delete element
+    const index = posts.indexOf(post);
+    posts.splice(index, 1);
+
+    // print in console the updated array
+    console.log(posts);
+
+    res.sendStatus(204);
 };
 
 // export the controller functions
