@@ -89,7 +89,16 @@ const destroy = (req, res) => {
             message: `Post with id ${id} not found`
         });
     }
+    else{
+        // remove the element from the array
+        const index = posts.indexOf(post);
+        posts.splice(index, 1);
+        
+        // print in console the updated array
+        console.log(posts);
 
+        res.sendStatus(204);
+    }
 
 };
 
