@@ -9,16 +9,16 @@ const { error } = require('console');
 // index
 const index = (req, res) => {
     // if query is passed in the request, return the post with that id
-    const tag = parseInt(req.query.tag);
-    if(tag){
-        const post = posts.find(element => element.tag === tag);
+    const id = parseInt(req.query.id);
+    if(id){
+        const post = posts.find(element => element.id === id);
 
         // if post is not found, return 404 error
         if(!post){
             res.status(404).json({
                 success: false,
                 error: '404 Not Found',
-                message: `Post with id ${tag} not found`
+                message: `Post with id ${id} not found`
             });
         }
         else{
@@ -59,7 +59,34 @@ const show = (req, res) => {
 
 // store
 const store = (req, res) => {
-    res.send(`Creazione nuovo post`);
+    // need to find first available id
+    let id = 1;
+    while(posts.find(element => element.id === id)){
+        id++;
+    }
+    // create new post
+    const post = {
+        id: id,
+        title: req.query.title,
+        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+        image: '/placeholder.png',
+        tags: ['placeholder']
+    };
+
+    // add the new post to the array
+    posts.push(post);
+
+    // sort the array by id
+    posts.sort((a, b) => a.id - b.id);
+
+    // print in console the updated array
+    console.log(posts);
+    // return the new post
+    // status code 201: Created
+    res.status(201).json({
+        success: true,
+        data: post
+    });
 };
 
 // update
