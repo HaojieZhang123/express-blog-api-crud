@@ -81,14 +81,16 @@ const destroy = (req, res) => {
     // find the element with the id
     const post = posts.find(element => element.id === id);
 
-    // delete element
-    const index = posts.indexOf(post);
-    posts.splice(index, 1);
+    // if post is not found, return 404 error
+    if(!post){
+        res.status(404).json({
+            success: false,
+            error: '404 Not Found',
+            message: `Post with id ${id} not found`
+        });
+    }
 
-    // print in console the updated array
-    console.log(posts);
 
-    res.sendStatus(204);
 };
 
 // export the controller functions
