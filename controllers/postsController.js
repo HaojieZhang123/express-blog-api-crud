@@ -58,9 +58,24 @@ const show = (req, res) => {
 };
 
 // store
+const store = (req, res) => {
+    res.send(`Creazione nuovo post`);
+};
 
 // update
+const update = (req, res) => {
+    const id = req.params.id;
+    res.send(`Post con id ${id} aggiornato`);
+};
 
 // modify
+const modify = (req, res) => {
+    const id = req.params.id;
+    res.send(`Post con id ${id} modificato`);
+};
 
 // delete
+const destroy = (req, res) => {
+    const id = req.params.id;
+    res.send(`Post con id ${id} eliminato`);
+};
