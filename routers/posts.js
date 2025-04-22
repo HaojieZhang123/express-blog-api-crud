@@ -3,8 +3,6 @@ const express = require('express');
 // router class
 const router = express.Router();
 
-// importing posts array
-const posts = require('../posts.js');
 
 // get all posts
 router.get('/', (req, res) => {
