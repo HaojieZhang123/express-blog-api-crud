@@ -9,16 +9,16 @@ const { error } = require('console');
 // index
 const index = (req, res) => {
     // if query is passed in the request, return the post with that id
-    const id = parseInt(req.query.id);
-    if(id){
-        const post = posts.find(element => element.id === id);
+    const tag = parseInt(req.query.tag);
+    if(tag){
+        const post = posts.find(element => element.tag === tag);
 
         // if post is not found, return 404 error
         if(!post){
             res.status(404).json({
                 success: false,
                 error: '404 Not Found',
-                message: `Post with id ${id} not found`
+                message: `Post with id ${tag} not found`
             });
         }
         else{
