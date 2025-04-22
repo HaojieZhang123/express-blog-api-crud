@@ -79,3 +79,13 @@ const destroy = (req, res) => {
     const id = req.params.id;
     res.send(`Post con id ${id} eliminato`);
 };
+
+// export the controller functions
+module.exports = {
+    index,
+    show,
+    store,
+    update,
+    modify,
+    destroy
+};

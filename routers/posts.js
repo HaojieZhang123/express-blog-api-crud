@@ -3,43 +3,25 @@ const express = require('express');
 // router class
 const router = express.Router();
 
+// controller functions
+const postsController = require('../controllers/postsController.js');
 
 // get all posts
-router.get('/', (req, res) => {
-    res.json(posts);
-});
-
+router.get('/', postsController.index);
 // get post by id
-router.get('/:id', (req, res) => {
-    const postId = req.params.id;
-    const post = posts.find(p => p.id == postId);
-    if (!post) {
-        res.send('Post non trovato');
-    }
-    else{
-        res.json(post);
-    }
-});
+router.get('/:id', postsController.show);
 
 // create a new post
-router.post('/', (req, res) => {
-
-});
+router.post('/', postsController.store);
 
 // update post by id
-router.put('/:id', (req, res) => {
-
-});
+router.put('/:id', postsController.update);
 
 // modify post by id
-router.patch('/:id', (req, res) => {
-
-});
+router.patch('/:id', postsController.modify);
 
 // delete post by id
-router.delete('/:id', (req, res) => {
-
-});
+router.delete('/:id', postsController.destroy);
 
 // export the router
 module.exports = router;
