@@ -1,11 +1,7 @@
-const express = require('express');
-
 // import array data
 const posts = require('../data/posts.js');
-const { error } = require('console');
 
 // controller functions
-
 // index
 const index = (req, res) => {
     // if query is passed in the request, return the post with that id
