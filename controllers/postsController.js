@@ -88,6 +88,15 @@ const update = (req, res) => {
     // find the element with the id
     const post = posts.find(element => element.id === id);
 
+    // if post is not found, return 404 error
+    if(!post){
+        return res.status(404).json({
+            success: false,
+            error: '404 Not Found',
+            message: `Post with id ${id} not found`
+        });
+    }
+
     // destructure request body
     const { title, content, image, tags } = req.body;
 
