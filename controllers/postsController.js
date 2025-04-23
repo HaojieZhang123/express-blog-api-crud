@@ -82,8 +82,27 @@ const store = (req, res) => {
 
 // update
 const update = (req, res) => {
+    // getting id of the post to be updated
     const id = parseInt(req.params.id);
-    res.send(`Post con id ${id} aggiornato`);
+
+    // find the element with the id
+    const post = posts.find(element => element.id === id);
+
+    // destructure request body
+    const { title, content, image, tags } = req.body;
+
+    // updating the post
+    post.title = title;
+    post.content = content;
+    post.image = image;
+    post.tags = tags;
+
+    // print in console the updated array
+    console.log(posts);
+    res.status(200).json({
+        success: true,
+        data: post
+    });
 };
 
 // modify
