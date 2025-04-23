@@ -116,8 +116,36 @@ const update = (req, res) => {
 
 // modify
 const modify = (req, res) => {
+    // getting id of the post to be updated
     const id = parseInt(req.params.id);
-    res.send(`Post con id ${id} modificato`);
+
+    // find the element with the id
+    const post = posts.find(element => element.id === id);
+
+    // if post is not found, return 404 error
+    if(!post){
+        return res.status(404).json({
+            success: false,
+            error: '404 Not Found',
+            message: `Post with id ${id} not found`
+        });
+    }
+
+    // destructure request body
+    const { title, content, image, tags } = req.body;
+
+    // updating the posto if the value is not undefined
+    if(title) post.title = title;
+    if(content) post.content = content;
+    if(image) post.image = image;
+    if(tags) post.tags = tags;
+
+    // print in console the updated array
+    console.log(posts);
+    res.status(200).json({
+        success: true,
+        data: post
+    });
 };
 
 // delete
