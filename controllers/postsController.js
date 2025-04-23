@@ -55,10 +55,29 @@ const show = (req, res) => {
 
 // store
 const store = (req, res) => {
+    // create new id
+    const id = posts[posts.length - 1].id + 1;
 
-    console.log(req.body);
+    // destructure request body
+    const { title, content, image, tags } = req.body;
+    // create new post
+    const newPost = {
+        id,
+        title,
+        content,
+        image,
+        tags
+    };
 
-    res.json('Post creato');
+    // add new post to the existing posts array
+    posts.push(newPost);
+
+    // print in console the updated array
+    console.log(posts);
+    res.status(201).json({
+        success: true,
+        data: newPost
+    });
 };
 
 // update
