@@ -9,10 +9,11 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // router
-const postsRouter = require('./routers/posts');
+const postsRouter = require('./routers/posts.js');
 
 // middleware
-const notFound = require('./middlewares/notFound');
+const notFound = require('./middlewares/notFound.js');
+const errorsHandler = require('./middlewares/errorsHandler.js');
 
 // use the posts router
 app.use('/posts', postsRouter);
@@ -24,6 +25,7 @@ app.get('/', (req, res) => {
 
 // errors middleware
 app.use(notFound);
+app.use(errorsHandler);
 
 // server listens on port 3000
 app.listen(port, () => {
