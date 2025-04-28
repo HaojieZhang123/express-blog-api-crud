@@ -7,14 +7,23 @@ const port = 3000;
 app.use(express.json());
 
 app.use(express.static('public'));
+
 // router
 const postsRouter = require('./routers/posts');
+
+// middleware
+const notFound = require('./middlewares/notFound');
+
+// use the posts router
 app.use('/posts', postsRouter);
 
 // base route
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
+
+// errors middleware
+app.use(notFound);
 
 // server listens on port 3000
 app.listen(port, () => {
